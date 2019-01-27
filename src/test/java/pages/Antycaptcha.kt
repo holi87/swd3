@@ -14,12 +14,12 @@ class AntycaptchaSpec : Spek({
         val goodAnswer = "OK. Good answer"
         val exercise = Exercises()
         describe("Exercises") {
-            describe("Exercise 1") {
+            val exercisesNames = listOf("Three buttons", "Editbox", "Dropdown list")
+            describe("Exercise 1 - ${exercisesNames[0]}") {
                 beforeEachTest {
                     landingPage.open(Config.antycaptchaUrl)
-                    val seed = landingPage.getSeed()
-                    landingPage.open(Config.antycaptchaUrl + landingPage.exerciseOneUrl + seed)
-                    println(seed)
+                    println(landingPage.getSeed())
+                    landingPage.openExerciseByName(exercisesNames[0])
                 }
                 it("Check what you have to click, then do this and check answer") {
                     exercise.pressAllButtonsByGoals()
@@ -33,12 +33,11 @@ class AntycaptchaSpec : Spek({
                     exercise.getSolution() shouldNotBe goodAnswer
                 }
             }
-            describe("Exercise 2") {
+            describe("Exercise 2 - ${exercisesNames[1]}") {
                 beforeEachTest {
                     landingPage.open(Config.antycaptchaUrl)
-                    val seed = landingPage.getSeed()
-                    landingPage.open(Config.antycaptchaUrl + landingPage.exerciseTwoUrl + seed)
-                    println(seed)
+                    println(landingPage.getSeed())
+                    landingPage.openExerciseByName(exercisesNames[1])
                 }
                 it("Check text and put it to editbox, press B1, after that check solution") {
                     exercise.setTextInEditBox(exercise.getTextForExercise())
@@ -51,12 +50,11 @@ class AntycaptchaSpec : Spek({
                     exercise.getSolution() shouldNotBe goodAnswer
                 }
             }
-            describe("Exercise 3") {
+            describe("Exercise 3 - ${exercisesNames[2]}") {
                 beforeEachTest {
                     landingPage.open(Config.antycaptchaUrl)
-                    val seed = landingPage.getSeed()
-                    landingPage.open(Config.antycaptchaUrl + landingPage.exerciseThreeUrl + seed)
-                    println(seed)
+                    println(landingPage.getSeed())
+                    landingPage.openExerciseByName(exercisesNames[2])
                 }
                 it("check name, select it from dropdown and check solution") {
                     exercise.selectOptionInDropdownList(exercise.getTextForExercise())
@@ -72,11 +70,16 @@ class AntycaptchaSpec : Spek({
         describe("Certified Selenium Tester Foundation Level") {
             val stf = Stf()
             beforeEachTest { landingPage.open(Config.antycaptchaUrl) }
-            it("STF-3.2") {
+            it("STF-3.2 positive way") {
                 landingPage.stf32()
                 val seed = stf.getSeedForStf()
                 stf.openSolutionPage(seed)
                 stf.getSolution() shouldBe goodAnswer
+            }
+            it("STF-3.2 negative check") {
+                landingPage.stf32()
+                stf.openSolutionPage("123131")
+                stf.getSolution() shouldNotBe goodAnswer
             }
         }
     }
