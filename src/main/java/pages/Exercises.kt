@@ -26,5 +26,15 @@ class Exercises : Common() {
         }
     }
 
+    fun getTextForEditBox(): String {
+        return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='twelve columns']/code"))).text
+    }
+
+    fun setTextInEditBox(text: String) {
+        val editbox = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("t14")))
+        editbox.clear()
+        editbox.sendKeys(text)
+    }
+
 
 }
