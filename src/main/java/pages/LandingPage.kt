@@ -17,9 +17,6 @@ class LandingPage : Common() {
     fun openExerciseByName(exercise: String) {
         exercisesButtons().findElement(By.xpath("//a[contains(text(),'$exercise')]")).click()
     }
-    val exerciseOneUrl = "/exercises/exercise1?seed="
-    val exerciseTwoUrl = "/exercises/exercise2?seed="
-    val exerciseThreeUrl = "/exercises/exercise3?seed="
 
     fun stf32() {
         Config.driver.findElement(By.xpath("//a[contains(text(),'WebDriver')]")).click()
