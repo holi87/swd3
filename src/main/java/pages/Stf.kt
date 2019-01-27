@@ -21,7 +21,9 @@ class Stf : Common() {
     fun copyAlertTextToAlertBox() {
         val alertBox = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("alertText")))
         alertBox.clear()
-        alertBox.sendKeys(Config.driver.switchTo().alert().text)
+        val textForBox = Config.driver.switchTo().alert().text
+        Config.driver.switchTo().defaultContent()
+        alertBox.sendKeys(textForBox)
     }
 
     fun closeAlert() {

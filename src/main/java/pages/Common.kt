@@ -24,12 +24,7 @@ open class Common {
 
 
     fun pressCheckButton() {
-        // tymczas bo są różne ajdiki
-        if (Config.driver.findElements(By.id("end")).isNotEmpty()) {
-            pressButtonById("end")
-        } else {
-            pressButtonById("solution")
-        }
+        pressButtonById("solution")
     }
 
     fun getSolution(): String {
