@@ -1,7 +1,6 @@
 package pages
 
 import Config
-import net.bytebuddy.utility.RandomString
 import org.openqa.selenium.By
 import org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable
 import org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated
@@ -17,25 +16,18 @@ open class Common {
         Config.driver.quit()
     }
 
-    private val webDriverWait = WebDriverWait(Config.driver, 5)
+    val webDriverWait = WebDriverWait(Config.driver, 5)
 
     fun pressButtonById(id: String) {
         webDriverWait.until(elementToBeClickable(By.id(id))).click()
     }
 
-    fun pressButtonByText(text: String) {
-        webDriverWait.until(elementToBeClickable(By.xpath("//button[contains(text(),$text)]")))
-    }
 
     fun checkSolution(): String {
+        println(Config.driver.findElement(By.xpath("//div/pre/code")).text)
         pressButtonById("end")
         return webDriverWait.until(visibilityOfElementLocated(By.cssSelector("#trail code"))).text
     }
 
-    fun randomStringGenerator(numberOfChars: Int): String {
-        return RandomString.make(numberOfChars)
-    }
 
-    //do odkomentowania w razie potrzeb, chwilowo zbedne
-//    val jsExecutorInBrowser = Config.driver as JavascriptExecutor
 }

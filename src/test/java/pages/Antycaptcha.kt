@@ -11,12 +11,22 @@ import org.jetbrains.spek.api.dsl.it
 
 
 class AntycaptchaSpec : Spek({
+    val landingPage = LandingPage()
     describe("Starter") {
+
         val goodAnswer = "OK. Good answer"
+
         describe("Cwiczenie1") {
             val exercise = Exercises()
-            beforeEachTest { exercise.open(Config.antycaptchaUrl + exercise.url) }
-            it("Kliknij B1B2B1 a potem sprawdź (positive one)") {
+            beforeEachTest {
+                landingPage.open(Config.antycaptchaUrl)
+                val seed = landingPage.getSeed()
+                landingPage.open(Config.antycaptchaUrl + landingPage.exerciseOneUrl + seed)
+                println(seed)
+            }
+            it("Check what you have to click, then do this and check answer") {
+
+                exercise.pressAllButtonsByGoals()
 
                 exercise.checkSolution() shouldBe goodAnswer
             }
@@ -28,6 +38,7 @@ class AntycaptchaSpec : Spek({
         }
 
     }
+    afterGroup { landingPage.close() }
 
 
 } // this spec end

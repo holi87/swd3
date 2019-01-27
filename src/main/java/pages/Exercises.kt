@@ -1,7 +1,10 @@
 package pages
 
+import org.openqa.selenium.By
+import org.openqa.selenium.WebElement
+import org.openqa.selenium.support.ui.ExpectedConditions
+
 class Exercises : Common() {
-    val url = "exercises/exercise1"
 
     fun pressB1() {
         pressButtonById("btnButton1")
@@ -9,6 +12,18 @@ class Exercises : Common() {
 
     fun pressB2() {
         pressButtonById("btnButton2")
+    }
+
+    private fun getListOfGoals(): List<WebElement> =
+            webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.row > code")))
+
+    fun pressAllButtonsByGoals() {
+        getListOfGoals().forEach {
+            when (it.text) {
+                "B1" -> pressB1()
+                "B2" -> pressB2()
+            }
+        }
     }
 
 
