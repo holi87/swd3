@@ -23,15 +23,17 @@ open class Common {
     }
 
 
-    fun checkSolution(): String {
+    fun pressCheckButton() {
         // tymczas bo są różne ajdiki
         if (Config.driver.findElements(By.id("end")).isNotEmpty()) {
             pressButtonById("end")
         } else {
             pressButtonById("solution")
         }
-        return webDriverWait.until(visibilityOfElementLocated(By.cssSelector("#trail code"))).text
     }
 
+    fun getSolution(): String {
+        return webDriverWait.until(visibilityOfElementLocated(By.cssSelector("#trail code"))).text
+    }
 
 }
