@@ -81,6 +81,19 @@ class AntycaptchaSpec : Spek({
                 stf.openSolutionPage("123131")
                 stf.getSolution() shouldNotBe goodAnswer
             }
+            it("STF-3.8 - positive way") {
+                landingPage.stf38()
+                stf.clickAlertButton()
+                stf.copyAlertTextToAlertBox()
+                stf.closeAlert()
+                stf.pressCheckButton()
+                stf.getSolution() shouldBe goodAnswer
+            }
+            it("STF-3.8 - negative way") {
+                landingPage.stf38()
+                stf.pressCheckButton()
+                stf.getSolution() shouldNotBe goodAnswer
+            }
         }
     }
 
