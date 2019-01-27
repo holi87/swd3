@@ -6,5 +6,5 @@ object Config {
         val driver = ChromeDriver()
         driver
     }
-    val antycaptchaUrl = "https://antycaptcha.amberteam.pl:5443/"
+    const val antycaptchaUrl = "https://antycaptcha.amberteam.pl:5443/"
 }
