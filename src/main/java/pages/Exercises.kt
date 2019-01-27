@@ -26,7 +26,7 @@ class Exercises : Common() {
         }
     }
 
-    fun getTextForEditBox(): String {
+    fun getTextForExercise(): String {
         return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='twelve columns']/code"))).text
     }
 
@@ -36,5 +36,17 @@ class Exercises : Common() {
         editbox.sendKeys(text)
     }
 
+    fun selectOptionInDropdownList(text: String) {
+        // bo select ma focha
+        val dropdownList = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("s13")))
+        val elements = dropdownList.findElements(By.tagName("option"))
+        elements.forEach {
+            if (it.text == text) {
+                it.click()
+                return
+            }
+        }
+
+    }
 
 }

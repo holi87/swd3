@@ -10,4 +10,5 @@ class LandingPage : Common() {
 
     val exerciseOneUrl = "/exercises/exercise1?seed="
     val exerciseTwoUrl = "/exercises/exercise2?seed="
+    val exerciseThreeUrl = "/exercises/exercise3?seed="
 }

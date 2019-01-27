@@ -38,7 +38,7 @@ class AntycaptchaSpec : Spek({
                 println(seed)
             }
             it("Check text and put it to editbox, press B1, after that check solution") {
-                exercise.setTextInEditBox(exercise.getTextForEditBox())
+                exercise.setTextInEditBox(exercise.getTextForExercise())
                 exercise.pressB1()
                 exercise.checkSolution() shouldBe goodAnswer
             }
@@ -46,7 +46,21 @@ class AntycaptchaSpec : Spek({
                 exercise.checkSolution() shouldNotBe goodAnswer
             }
         }
-
+        describe("Exercise 3") {
+            beforeEachTest {
+                landingPage.open(Config.antycaptchaUrl)
+                val seed = landingPage.getSeed()
+                landingPage.open(Config.antycaptchaUrl + landingPage.exerciseThreeUrl + seed)
+                println(seed)
+            }
+            it("check name, select it from dropdown and check solution") {
+                exercise.selectOptionInDropdownList(exercise.getTextForExercise())
+                exercise.checkSolution() shouldBe goodAnswer
+            }
+            it("do nothing and check solution") {
+                exercise.checkSolution() shouldNotBe goodAnswer
+            }
+        }
     }
     afterGroup { landingPage.close() }
 

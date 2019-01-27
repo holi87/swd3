@@ -24,8 +24,12 @@ open class Common {
 
 
     fun checkSolution(): String {
-        println(Config.driver.findElement(By.xpath("//div/pre/code")).text)
-        pressButtonById("end")
+        // tymczas bo są różne ajdiki
+        if (Config.driver.findElements(By.id("end")).isNotEmpty()) {
+            pressButtonById("end")
+        } else {
+            pressButtonById("solution")
+        }
         return webDriverWait.until(visibilityOfElementLocated(By.cssSelector("#trail code"))).text
     }
 
