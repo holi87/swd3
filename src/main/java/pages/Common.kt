@@ -25,10 +25,15 @@ open class Common {
 
     fun pressCheckButton() {
         pressButtonById("solution")
+
     }
 
     fun getSolution(): String {
-        return webDriverWait.until(visibilityOfElementLocated(By.cssSelector("#trail code"))).text
+        val answerBox = webDriverWait.until(visibilityOfElementLocated(By.cssSelector("#trail code")))
+        webDriverWait.until {
+            answerBox.text != "Trail..."
+        }
+        return answerBox.text
     }
 
 }

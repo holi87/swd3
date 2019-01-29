@@ -16,14 +16,19 @@ class Stf : Common() {
 
     fun clickAlertButton() {
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("showAlert"))).click()
+        webDriverWait.until(ExpectedConditions.alertIsPresent())
     }
 
-    fun copyAlertTextToAlertBox() {
+    fun getTextFromAlert(): String {
+        return Config.driver.switchTo().alert().text
+
+    }
+
+    fun setTextIntoTextBox(text: String) {
+        Config.driver.switchTo().defaultContent()
         val alertBox = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("alertText")))
         alertBox.clear()
-        val textForBox = Config.driver.switchTo().alert().text
-        Config.driver.switchTo().defaultContent()
-        alertBox.sendKeys(textForBox)
+        alertBox.sendKeys(text)
     }
 
     fun closeAlert() {

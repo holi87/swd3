@@ -10,7 +10,7 @@ class LandingPage : Common() {
         return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//pre/code/em"))).text
     }
 
-    fun exercisesButtons(): WebElement {
+    private fun exercisesButtons(): WebElement {
         return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='four columns']")))
     }
 

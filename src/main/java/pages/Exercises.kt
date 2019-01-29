@@ -38,7 +38,9 @@ class Exercises : Common() {
 
     fun selectOptionInDropdownList(text: String) {
         // bo select ma focha
-        val dropdownList = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("s13")))
+        val dropdownList = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("s13"))) // s Select
+//        dropdownList.deselectAll()
+//        dropdownList.selectByVisibleText(text)
         val elements = dropdownList.findElements(By.tagName("option"))
         elements.forEach {
             if (it.text == text) {

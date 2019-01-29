@@ -84,8 +84,9 @@ class AntycaptchaSpec : Spek({
             it("STF-3.8 - positive way") {
                 landingPage.stf38()
                 stf.clickAlertButton()
-                stf.copyAlertTextToAlertBox()
+                val alertText = stf.getTextFromAlert()
                 stf.closeAlert()
+                stf.setTextIntoTextBox(alertText)
                 stf.pressCheckButton()
                 stf.getSolution() shouldBe goodAnswer
             }
