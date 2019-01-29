@@ -31,14 +31,12 @@ class Exercises : Common() {
     }
 
     fun setTextInEditBox(text: String) {
-        val editbox = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("t14")))
-        editbox.clear()
-        editbox.sendKeys(text)
+        setTextIntoInputById("t14", text)
     }
 
     fun selectOptionInDropdownList(text: String) {
         // bo select ma focha
-        val dropdownList = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("s13"))) // s Select
+        val dropdownList = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("s13"))) // as Select
 //        dropdownList.deselectAll()
 //        dropdownList.selectByVisibleText(text)
         val elements = dropdownList.findElements(By.tagName("option"))

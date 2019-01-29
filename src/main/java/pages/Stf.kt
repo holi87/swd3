@@ -24,11 +24,8 @@ class Stf : Common() {
 
     }
 
-    fun setTextIntoTextBox(text: String) {
-        Config.driver.switchTo().defaultContent()
-        val alertBox = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("alertText")))
-        alertBox.clear()
-        alertBox.sendKeys(text)
+    fun setTextIntoEditBox(text: String) {
+        setTextIntoInputById("alertText", text)
     }
 
     fun closeAlert() {

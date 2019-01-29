@@ -86,7 +86,7 @@ class AntycaptchaSpec : Spek({
                 stf.clickAlertButton()
                 val alertText = stf.getTextFromAlert()
                 stf.closeAlert()
-                stf.setTextIntoTextBox(alertText)
+                stf.setTextIntoEditBox(alertText)
                 stf.pressCheckButton()
                 stf.getSolution() shouldBe goodAnswer
             }

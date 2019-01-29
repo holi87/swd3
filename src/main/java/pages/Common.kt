@@ -2,6 +2,7 @@ package pages
 
 import Config
 import org.openqa.selenium.By
+import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable
 import org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated
 import org.openqa.selenium.support.ui.WebDriverWait
@@ -22,7 +23,11 @@ open class Common {
         webDriverWait.until(elementToBeClickable(By.id(id))).click()
     }
 
-
+    fun setTextIntoInputById(id: String, text: String) {
+        val textBox = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)))
+        textBox.clear()
+        textBox.sendKeys(text)
+    }
     fun pressCheckButton() {
         pressButtonById("solution")
 
