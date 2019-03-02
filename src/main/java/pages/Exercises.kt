@@ -49,4 +49,28 @@ class Exercises : Common() {
 
     }
 
+    private fun getGroups(): List<WebElement> {
+        return webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy((By.xpath("//ul/li"))))
+    }
+
+    private fun getGroupNameAndRadioName(): HashMap<String, String> {
+        val map = hashMapOf<String, String>()
+        getGroups().forEach {
+            map.set(key = it.text.split(":")[0], value = it.text.split(":")[1].drop(1))
+        }
+
+        return map
+    }
+
+    fun setRadioButtonsByNames() {
+        val names = getGroupNameAndRadioName()
+        println(names)
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.cssSelector("div.u-full-width"))).forEach {
+            val radioName = names.getValue(it.findElement(By.tagName("h5")).text.dropLast(1))
+            val groupName = it.findElement(By.tagName("h5")).text
+            it.findElement(By.xpath("/input[text(., contains('$radioName'))]")).click()
+
+        }
+    }
+
 }

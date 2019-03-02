@@ -72,8 +72,16 @@ class AntycaptchaSpec : Spek({
                     println(landingPage.getSeed())
                     landingPage.openExerciseByName(exercisesNames[3])
                 }
-                it("positive") {}
-                it("negative") {}
+                it("check names in groups, select radio buttons then check solution") {
+                    //                    exercise.getGroupNameAndRadioName()
+                    exercise.setRadioButtonsByNames()
+                    exercise.pressCheckButton()
+                    exercise.getSolution() shouldBe goodAnswer
+                }
+                it("do nothing and check solution") {
+                    exercise.pressCheckButton()
+                    exercise.getSolution() shouldNotBe goodAnswer
+                }
             }
         }
         describe("Certified Selenium Tester Foundation Level") {
