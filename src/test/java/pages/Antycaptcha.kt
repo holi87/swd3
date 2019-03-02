@@ -14,7 +14,7 @@ class AntycaptchaSpec : Spek({
         val goodAnswer = "OK. Good answer"
         val exercise = Exercises()
         describe("Exercises") {
-            val exercisesNames = listOf("Three buttons", "Editbox", "Dropdown list")
+            val exercisesNames = listOf("Three buttons", "Editbox", "Dropdown list", "Radio buttons")
             describe("Exercise 1 - ${exercisesNames[0]}") {
                 beforeEachTest {
                     landingPage.open(Config.antycaptchaUrl)
@@ -65,6 +65,15 @@ class AntycaptchaSpec : Spek({
                     exercise.pressCheckButton()
                     exercise.getSolution() shouldNotBe goodAnswer
                 }
+            }
+            describe("Exercise 4 - ${exercisesNames[3]}") {
+                beforeEachTest {
+                    landingPage.open(Config.antycaptchaUrl)
+                    println(landingPage.getSeed())
+                    landingPage.openExerciseByName(exercisesNames[3])
+                }
+                it("positive") {}
+                it("negative") {}
             }
         }
         describe("Certified Selenium Tester Foundation Level") {

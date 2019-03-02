@@ -12,10 +12,7 @@ open class Common {
         Config.driver.get(url)
     }
 
-    fun close() {
-        Config.driver.close()
-        Config.driver.quit()
-    }
+    fun close() = Config.driver.quit()
 
     val webDriverWait = WebDriverWait(Config.driver, 5)
 
