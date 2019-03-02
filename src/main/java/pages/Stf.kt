@@ -31,4 +31,18 @@ class Stf : Common() {
     fun closeAlert() {
         Config.driver.switchTo().alert().dismiss()
     }
+
+    fun getIdOfElement(): String {
+        var id = ""
+        webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy((By.xpath("//ol/li")))).forEach {
+            if (it.text.contains("Find and click button with id: ")) {
+                id = it.findElement(By.tagName("em")).text
+            }
+        }
+        return id
+    }
+
+    fun clickButtonById(id: String) {
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id(id))).click()
+    }
 }

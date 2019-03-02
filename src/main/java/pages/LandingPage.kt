@@ -22,6 +22,10 @@ class LandingPage : Common() {
         Config.driver.findElement(By.xpath("//a[contains(text(),'WebDriver')]")).click()
     }
 
+    fun stf35() {
+        Config.driver.findElement(By.xpath("//a[contains(text(),'Find')]")).click()
+    }
+
     fun stf38() {
         Config.driver.findElement(By.xpath("//a[contains(text(),'alert')]")).click()
     }
