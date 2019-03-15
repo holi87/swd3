@@ -73,7 +73,6 @@ class AntycaptchaSpec : Spek({
                     landingPage.openExerciseByName(exercisesNames[3])
                 }
                 it("check names in groups, select radio buttons then check solution") {
-                    //                    exercise.getGroupNameAndRadioName()
                     exercise.setRadioButtonsByNames()
                     exercise.pressCheckButton()
                     exercise.getSolution() shouldBe goodAnswer
@@ -98,19 +97,39 @@ class AntycaptchaSpec : Spek({
                 stf.openSolutionPage("123131")
                 stf.getSolution() shouldNotBe goodAnswer
             }
-            it("STF-3.5 positive way") {
-                landingPage.stf35()
-                val id = stf.getIdOfElement()
-                stf.clickButtonById(id)
+            it("STF-3.5 ID positive way") {
+                landingPage.stf35("id")
+                stf.clickButtonById(stf.getValueOfAttribute())
                 stf.pressCheckButton()
                 stf.getSolution() shouldBe goodAnswer
             }
-            it("STF-3.5 negative check") {
-                landingPage.stf35()
+            it("STF-3.5 ID negative check") {
+                landingPage.stf35("id")
                 stf.pressCheckButton()
                 stf.getSolution() shouldNotBe goodAnswer
             }
-            it("STF-3.8 - positive way") {
+            it("STF-3.5 CLASS positive way") {
+                landingPage.stf35("class")
+                stf.clickButtonByClassName(stf.getValueOfAttribute())
+                stf.pressCheckButton()
+                stf.getSolution() shouldBe goodAnswer
+            }
+            it("STF-3.5 CLASS negative check") {
+                landingPage.stf35("class")
+                stf.pressCheckButton()
+                stf.getSolution() shouldNotBe goodAnswer
+            }
+            it("STF-3.5 TAG positive way") {
+                landingPage.stf35("tag")
+                stf.clickLinkByTagName(stf.getValueOfAttribute())
+                stf.getSolution() shouldBe goodAnswer
+            }
+            it("STF-3.5 TAG negative check") {
+                landingPage.stf35("tag")
+                stf.clickLinkByTagName(stf.getWrongTagAttribute())
+                stf.getSolution() shouldNotBe goodAnswer
+            }
+            it("STF-3.8 positive way") {
                 landingPage.stf38()
                 stf.clickAlertButton()
                 val alertText = stf.getTextFromAlert()
@@ -119,7 +138,7 @@ class AntycaptchaSpec : Spek({
                 stf.pressCheckButton()
                 stf.getSolution() shouldBe goodAnswer
             }
-            it("STF-3.8 - negative way") {
+            it("STF-3.8 negative way") {
                 landingPage.stf38()
                 stf.pressCheckButton()
                 stf.getSolution() shouldNotBe goodAnswer

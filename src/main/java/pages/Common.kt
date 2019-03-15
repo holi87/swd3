@@ -2,9 +2,8 @@ package pages
 
 import Config
 import org.openqa.selenium.By
+import org.openqa.selenium.WebElement
 import org.openqa.selenium.support.ui.ExpectedConditions
-import org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable
-import org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated
 import org.openqa.selenium.support.ui.WebDriverWait
 
 open class Common {
@@ -16,24 +15,31 @@ open class Common {
 
     val webDriverWait = WebDriverWait(Config.driver, 5)
 
-    fun pressButtonById(id: String) {
-        webDriverWait.until(elementToBeClickable(By.id(id))).click()
+    fun webElementsLocatedBy(by: By): List<WebElement> {
+        return webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(by))
     }
 
+    fun webElementLocatedBy(by: By): WebElement {
+        return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(by))
+    }
+
+    fun clickBy(by: By) {
+        webDriverWait.until(ExpectedConditions.elementToBeClickable(by)).click()
+    }
     fun setTextIntoInputById(id: String, text: String) {
-        val textBox = webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id(id)))
+        val textBox = webElementLocatedBy(By.id(id))
         textBox.clear()
         textBox.sendKeys(text)
     }
     fun pressCheckButton() {
-        pressButtonById("solution")
+        clickBy(By.id("solution"))
 
     }
 
     fun getSolution(): String {
-        val answerBox = webDriverWait.until(visibilityOfElementLocated(By.cssSelector("#trail code")))
+        val answerBox = webElementLocatedBy(By.cssSelector("#trail code"))
         webDriverWait.until {
-            answerBox.text != "Trail..."
+            answerBox.text == "NOT OK." || answerBox.text == "OK. Good answer"
         }
         return answerBox.text
     }

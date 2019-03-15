@@ -8,3 +8,6 @@ chromedriver with version for your Chrome browser (set in system variable -> PAT
 
 # short info about Spek
 make x before describe (xdescribe) to ignore whole group or x before it (xit) to ignore that test  
+
+# version
+0.3 - actual for AntyCaptcha Version: 0.5.2

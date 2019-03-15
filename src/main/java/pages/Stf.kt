@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions
 
 class Stf : Common() {
     fun getSeedForStf(): String {
-        return webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//pre/code"))).text.drop(14)
+        return webElementLocatedBy(By.xpath("//pre/code")).text.drop(14)
     }
 
     fun openSolutionPage(seed: String) {
@@ -15,7 +15,7 @@ class Stf : Common() {
     }
 
     fun clickAlertButton() {
-        webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.id("showAlert"))).click()
+        clickBy(By.id("showAlert"))
         webDriverWait.until(ExpectedConditions.alertIsPresent())
     }
 
@@ -32,17 +32,31 @@ class Stf : Common() {
         Config.driver.switchTo().alert().dismiss()
     }
 
-    fun getIdOfElement(): String {
-        var id = ""
-        webDriverWait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy((By.xpath("//ol/li")))).forEach {
-            if (it.text.contains("Find and click button with id: ")) {
-                id = it.findElement(By.tagName("em")).text
-            }
-        }
-        return id
+    fun getValueOfAttribute(): String {
+        var valueOfAttribute = webElementLocatedBy(By.tagName("em")).text
+        if (valueOfAttribute.startsWith("<")) valueOfAttribute = valueOfAttribute.drop(1).dropLast(1)
+        println(valueOfAttribute)
+        return valueOfAttribute
     }
 
+    fun getWrongTagAttribute(): String {
+        var attribute = getValueOfAttribute()
+        attribute = "h" + (attribute.drop(1).toInt() + 1).toString()
+        if (attribute == "h7") {
+            attribute = "h2"
+        }
+        println(attribute)
+        return attribute
+    }
     fun clickButtonById(id: String) {
-        webDriverWait.until(ExpectedConditions.elementToBeClickable(By.id(id))).click()
+        clickBy(By.id(id))
+    }
+
+    fun clickButtonByClassName(className: String) {
+        clickBy(By.className(className))
+    }
+
+    fun clickLinkByTagName(tagName: String) {
+        webElementLocatedBy(By.tagName(tagName)).findElement(By.tagName("a")).click()
     }
 }
