@@ -7,9 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions
 import org.openqa.selenium.support.ui.WebDriverWait
 
 open class Common {
-    fun open(url: String) {
-        Config.driver.get(url)
-    }
+    fun open(url: String) = Config.driver.get(url)
 
     fun close() = Config.driver.quit()
 
