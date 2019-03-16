@@ -47,7 +47,7 @@ class Exercises : Common() {
 
     private fun getRadioNames(): List<String> {
         val listOfRadioNames: ArrayList<String> = arrayListOf()
-        webElementsLocatedBy((By.xpath("//td[2]/code"))).forEach {
+        getListOfGoals().forEach {
             listOfRadioNames.add(it.text)
         }
         return listOfRadioNames
