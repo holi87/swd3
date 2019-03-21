@@ -1,5 +1,9 @@
 package pages
 
+import org.openqa.selenium.support.ui.ExpectedConditions
+import org.openqa.selenium.support.ui.WebDriverWait
+
+
 
 /**
  * val => value -> raz przypisane, nie zmiennne
@@ -16,5 +20,9 @@ open class Common {
 
     fun closeBrowser(){
         Config.driver.quit()
+    }
+
+    fun blokadaNaPodglad(){
+        WebDriverWait(Config.driver, 60).until(ExpectedConditions.alertIsPresent())
     }
 }
